@@ -2,7 +2,7 @@
 
 #include "unit.h"
 
-class ClassUnit : public Unit {
+class CppClassUnit : public Unit {
 public:
     enum AccessModifier {
         PUBLIC,
@@ -11,7 +11,7 @@ public:
     };
 
 public:
-    explicit ClassUnit(const std::string& name) : m_name(name) {
+    explicit CppClassUnit(const std::string& name) : m_name(name) {
         m_fields.resize(3); // 3 - количество модификаторов доступа
     }
 

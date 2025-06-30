@@ -1,6 +1,6 @@
-#include "classunit.h"
-#include "methodunit.h"
-#include "printoperatorunit.h"
+#include "cpp_class_unit.h"
+#include "cpp_method_unit.h"
+#include "cpp_print_operator_unit.h"
 
 // Функция, жестко привязанная к C++
 std::string generateProgram() {

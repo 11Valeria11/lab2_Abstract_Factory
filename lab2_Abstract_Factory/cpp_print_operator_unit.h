@@ -2,9 +2,9 @@
 
 #include "unit.h"
 
-class PrintOperatorUnit : public Unit {
+class CppPrintOperatorUnit : public Unit {
 public:
-    explicit PrintOperatorUnit(const std::string& text) : m_text(text) {}
+    explicit CppPrintOperatorUnit(const std::string& text) : m_text(text) {}
 
     std::string compile(unsigned int level = 0) const override {
         // Экранируем кавычки и обратные слэши для printf
