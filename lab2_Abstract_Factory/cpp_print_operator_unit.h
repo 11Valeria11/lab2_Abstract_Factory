@@ -1,23 +1,14 @@
-#pragma once
+#ifndef CPP_PRINT_OPERATOR_UNIT_H
+#define CPP_PRINT_OPERATOR_UNIT_H
 
 #include "unit.h"
 
 class CppPrintOperatorUnit : public Unit {
 public:
-    explicit CppPrintOperatorUnit(const std::string& text) : m_text(text) {}
+    explicit CppPrintOperatorUnit(const std::string& text);
 
-    std::string compile(unsigned int level = 0) const override {
-        // Экранируем кавычки и обратные слэши для printf
-        std::string escaped_text;
-        for (char c : m_text) {
-            if (c == '\"' || c == '\\') {
-                escaped_text += '\\';
-            }
-            escaped_text += c;
-        }
-        return generateShift(level) + "printf(\"" + escaped_text + "\\n\");\n";
-    }
-
+    std::string compile(unsigned int level = 0) const override;
 private:
     std::string m_text;
 };
+#endif // CPP_PRINT_OPERATOR_UNIT_H

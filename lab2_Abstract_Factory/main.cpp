@@ -1,37 +1,39 @@
-#include "cpp_class_unit.h"
-#include "cpp_method_unit.h"
-#include "cpp_print_operator_unit.h"
+#include <iostream>
+#include "cpp_class_unit.h"//конкретная фабрика для main
+#include "cpp_factory.h"
+#include "unit.h"
 
-// Функция, жестко привязанная к C++
-std::string generateProgram() {
-    ClassUnit myClass("MyClass");
+// принимает абстрактную фабрику
+std::string generateProgram(std::shared_ptr<ICodeFactory> factory) {
+    auto myClass=factory->createClass("MyClass");
 
-    myClass.add(
-        std::make_shared<MethodUnit>("testFunc1", "void", 0),
-        ClassUnit::PUBLIC
+    myClass->add(
+        factory->createMethod("testFunc1", "void", 0),
+        CppClassUnit::PUBLIC
         );
 
-    myClass.add(
-        std::make_shared<MethodUnit>("testFunc2", "void", MethodUnit::STATIC),
-        ClassUnit::PRIVATE
+    myClass->add(
+        factory->createMethod("testFunc2", "void", Unit::STATIC),
+        CppClassUnit::PRIVATE
         );
 
-    myClass.add(
-        std::make_shared<MethodUnit>("testFunc3", "void", MethodUnit::VIRTUAL | MethodUnit::CONST),
-        ClassUnit::PUBLIC
+    myClass->add(
+        factory->createMethod("testFunc3", "void", Unit::VIRTUAL | Unit::CONST),
+        CppClassUnit::PUBLIC
         );
 
-    auto method = std::make_shared<MethodUnit>("testFunc4", "void", MethodUnit::STATIC);
+    auto method = factory->createMethod("testFunc4", "void", Unit::STATIC);
     method->add(
-        std::make_shared<PrintOperatorUnit>("Hello, world!")
+        factory->createPrintOperator("Hello, world!")
         );
-    myClass.add(method, ClassUnit::PROTECTED);
+    myClass->add(method, CppClassUnit::PROTECTED);
 
-    return myClass.compile();
+    return myClass->compile();
 }
 
-int main() {
-    std::cout << generateProgram() << std::endl;
+int main() {//решаем, какую конкретную фабрику использовать и передаем её в нашу универсальную функцию
+    std::cout << "---------- C++ ----------" << std::endl;
+    std::cout << generateProgram(std::make_shared<CppFactory>()) << std::endl;
     std::cout << "\nPress Enter to exit..."; // Сообщение для пользователя
     std::cin.get(); // Ожидание нажатия клавиши Enter
     return 0;
