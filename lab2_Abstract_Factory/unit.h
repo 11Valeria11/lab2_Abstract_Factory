@@ -10,7 +10,7 @@
 class Unit {
 public:
     using Flags = unsigned int;
-    //куда они отсюда делись????
+
     enum Modifier {
         STATIC = 1 << 0,
         CONST = 1 << 1,
@@ -20,13 +20,10 @@ public:
     };
 
     virtual ~Unit() = default;
-
-    virtual void add(const std::shared_ptr<Unit>&, Flags = 0);// ТОЛЬКО ОБЪЯВЛЕНИЕ
-
+    virtual void add(const std::shared_ptr<Unit>&, Flags = 0);
     virtual std::string compile(unsigned int level = 0) const = 0;
 
 protected:
-    // ТОЛЬКО ОБЪЯВЛЕНИЕ
     virtual std::string generateShift(unsigned int level) const;
 };
 #endif //UNIT_H

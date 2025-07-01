@@ -1,7 +1,9 @@
 #include <iostream>
 #include "cpp_class_unit.h"//конкретная фабрика для main
 #include "cpp_factory.h"
+#include "csharp_factory.h"
 #include "unit.h"
+#include "java_factory.h"
 
 // принимает абстрактную фабрику
 std::string generateProgram(std::shared_ptr<ICodeFactory> factory) {
@@ -22,7 +24,7 @@ std::string generateProgram(std::shared_ptr<ICodeFactory> factory) {
         CppClassUnit::PUBLIC
         );
 
-    auto method = factory->createMethod("testFunc4", "void", Unit::STATIC);
+    auto method = factory->createMethod("testFunc4", "void", Unit::STATIC| Unit::FINAL);
     method->add(
         factory->createPrintOperator("Hello, world!")
         );
@@ -31,10 +33,12 @@ std::string generateProgram(std::shared_ptr<ICodeFactory> factory) {
     return myClass->compile();
 }
 
-int main() {//решаем, какую конкретную фабрику использовать и передаем её в нашу универсальную функцию
+int main() {
     std::cout << "---------- C++ ----------" << std::endl;
     std::cout << generateProgram(std::make_shared<CppFactory>()) << std::endl;
-    std::cout << "\nPress Enter to exit..."; // Сообщение для пользователя
-    std::cin.get(); // Ожидание нажатия клавиши Enter
+    std::cout << "---------- C# ----------" << std::endl;
+    std::cout << generateProgram(std::make_shared<CSharpFactory>()) << std::endl;
+    std::cout << "---------- JAVA ----------" << std::endl;
+    std::cout << generateProgram(std::make_shared<JavaFactory>()) << std::endl;
     return 0;
 }

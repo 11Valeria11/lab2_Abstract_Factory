@@ -12,7 +12,8 @@ std::string CppMethodUnit::compile(unsigned int level) const {
 
     if (m_flags & STATIC) {
         result += "static ";
-    } else if (m_flags & VIRTUAL) {
+    }
+    else if (m_flags & VIRTUAL) {
         result += "virtual ";
     }
 

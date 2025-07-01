@@ -1,12 +1,12 @@
-#ifndef CPP_METHOD_UNIT_H
-#define CPP_METHOD_UNIT_H
+#ifndef JAVA_METHOD_UNIT_H
+#define JAVA_METHOD_UNIT_H
 
 #include "unit.h"
 
-class CppMethodUnit : public Unit {
+class JavaMethodUnit : public Unit {
 
 public:
-    CppMethodUnit(const std::string& name, const std::string& returnType, Flags flags);
+    JavaMethodUnit(const std::string& name, const std::string& returnType, Flags flags);
     void add(const std::shared_ptr<Unit>& unit, Flags = 0) override;
     std::string compile(unsigned int level = 0) const override;
 
@@ -17,4 +17,4 @@ private:
     std::vector<std::shared_ptr<Unit>> m_body;
 };
 
-#endif // CPP_METHOD_UNIT_H
+#endif // JAVA_METHOD_UNIT_H

@@ -1,9 +1,9 @@
-#ifndef CPP_FACTORY_H
-#define CPP_FACTORY_H
+#ifndef JAVA_FACTORY_H
+#define JAVA_FACTORY_H
 
 #include "factory.h"
 
-class CppFactory : public ICodeFactory {
+class JavaFactory : public ICodeFactory {
 
 public:
     std::shared_ptr<Unit> createClass(const std::string& name) override;
@@ -11,4 +11,4 @@ public:
     std::shared_ptr<Unit> createPrintOperator(const std::string& text) override;
 };
 
-#endif // CPP_FACTORY_H
+#endif // JAVA_FACTORY_H

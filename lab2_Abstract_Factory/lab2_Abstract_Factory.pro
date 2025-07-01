@@ -11,6 +11,14 @@ SOURCES += \
         cpp_factory.cpp \
         cpp_method_unit.cpp \
         cpp_print_operator_unit.cpp \
+        csharp_class_unit.cpp \
+        csharp_factory.cpp \
+        csharp_method_unit.cpp \
+        csharp_print_operator_unit.cpp \
+        java_class_unit.cpp \
+        java_factory.cpp \
+        java_method_unit.cpp \
+        java_print_operator_unit.cpp \
         main.cpp \
         unit.cpp
 
@@ -24,5 +32,13 @@ HEADERS += \
     cpp_factory.h \
     cpp_method_unit.h \
     cpp_print_operator_unit.h \
+    csharp_class_unit.h \
+    csharp_factory.h \
+    csharp_method_unit.h \
+    csharp_print_operator_unit.h \
     factory.h \
+    java_class_unit.h \
+    java_factory.h \
+    java_method_unit.h \
+    java_print_operator_unit.h \
     unit.h

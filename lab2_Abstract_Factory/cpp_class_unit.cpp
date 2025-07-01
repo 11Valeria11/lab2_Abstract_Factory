@@ -1,30 +1,35 @@
 #include "cpp_class_unit.h"
+#include <map>
 
-CppClassUnit::CppClassUnit(const std::string& name) : m_name(name) {
-    m_fields.resize(3);
-}
+CppClassUnit::CppClassUnit(const std::string& name) : m_name(name) {}
 
 void CppClassUnit::add(const std::shared_ptr<Unit>& unit, Flags flags) {
-    int accessModifier = PRIVATE;
-    if (flags < 3) {
-        accessModifier = flags;
-    }
-    m_fields[accessModifier].push_back(unit);
+    m_fields.push_back({unit, flags});
 }
 
 std::string CppClassUnit::compile(unsigned int level) const {
     std::string result = generateShift(level) + "class " + m_name + " {\n";
-    static const std::vector<std::string> access_modifiers = { "public", "protected", "private" };
 
-    for (size_t i = 0; i < 3; ++i) {
-        if (m_fields[i].empty()) {
+    std::map<Flags, std::vector<std::shared_ptr<Unit>>> groupedFields;
+    for (const auto& f : m_fields) {
+        groupedFields[f.second].push_back(f.first);
+    }
+
+    const std::vector<Flags> accessOrder = {PUBLIC, PROTECTED, PRIVATE};
+    const std::map<Flags, std::string> accessNames = {
+        {PUBLIC, "public"}, {PROTECTED, "protected"}, {PRIVATE, "private"}
+    };
+
+    for (Flags access : accessOrder) {
+        if (groupedFields.find(access) == groupedFields.end()) {
             continue;
         }
-        result += access_modifiers[i] + ":\n";
-        for (const auto& f : m_fields[i]) {
-            result += f->compile(level + 1);
+        result += generateShift(level) + accessNames.at(access) + ":\n";
+        for (const auto& field : groupedFields[access]) {
+            result += field->compile(level + 1);
         }
     }
+
     result += generateShift(level) + "};\n";
     return result;
 }
