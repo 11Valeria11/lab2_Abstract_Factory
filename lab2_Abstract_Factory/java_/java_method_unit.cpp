@@ -1,4 +1,4 @@
-#include "java_method_unit.h"
+#include "java\java_method_unit.h"
 
 JavaMethodUnit::JavaMethodUnit(const std::string& name, const std::string& returnType, Flags flags)
     : m_name(name), m_returnType(returnType), m_flags(flags) {}
@@ -8,7 +8,8 @@ void JavaMethodUnit::add(const std::shared_ptr<Unit>& unit, Flags) {
 }
 
 std::string JavaMethodUnit::compile(unsigned int level) const {
-    std::string result = generateShift(level) + "public ";
+    //std::string result = generateShift(level);
+    std::string result;
     if (m_flags & STATIC) {
         result += "static ";
     }

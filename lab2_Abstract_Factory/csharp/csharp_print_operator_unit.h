@@ -6,7 +6,7 @@
 class CSharpPrintOperatorUnit : public Unit {
 
 public:
-    explicit CSharpPrintOperatorUnit(const std::string& text);
+    CSharpPrintOperatorUnit(const std::string& text);
     std::string compile(unsigned int level = 0) const override;
 
 private:

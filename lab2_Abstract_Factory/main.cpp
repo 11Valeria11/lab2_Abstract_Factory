@@ -1,35 +1,40 @@
 #include <iostream>
-#include "cpp_class_unit.h"//конкретная фабрика для main
-#include "cpp_factory.h"
-#include "csharp_factory.h"
+#include "cpp\cpp_factory.h"//конкретная фабрика для main
+#include "cpp\cpp_factory.h"
+#include "csharp\csharp_factory.h"
 #include "unit.h"
-#include "java_factory.h"
+#include "java\java_factory.h"
 
-// принимает абстрактную фабрику
+
 std::string generateProgram(std::shared_ptr<ICodeFactory> factory) {
-    auto myClass=factory->createClass("MyClass");
+
+    auto myClass = factory->createClass("MyTestClass", Unit::ABSTRACT, Unit::PUBLIC);
+
+
 
     myClass->add(
-        factory->createMethod("testFunc1", "void", 0),
-        CppClassUnit::PUBLIC
+        factory->createMethod("testFunc1", "void", Unit::FINAL | Unit::STATIC),
+        Unit::PUBLIC
         );
+
 
     myClass->add(
-        factory->createMethod("testFunc2", "void", Unit::STATIC),
-        CppClassUnit::PRIVATE
+        factory->createMethod("testFunc2", "void", Unit::VIRTUAL | Unit::CONST),
+        Unit::PROTECTED
         );
+
 
     myClass->add(
-        factory->createMethod("testFunc3", "void", Unit::VIRTUAL | Unit::CONST),
-        CppClassUnit::PUBLIC
+        factory->createMethod("testFunc3", "void", Unit::ABSTRACT),
+        Unit::PRIVATE
         );
 
-    auto method = factory->createMethod("testFunc4", "void", Unit::STATIC| Unit::FINAL);
-    method->add(
-        factory->createPrintOperator("Hello, world!")
-        );
-    myClass->add(method, CppClassUnit::PROTECTED);
 
+    auto methodWithBody = factory->createMethod("testFunc4", "void", 0);
+    methodWithBody->add(
+        factory->createPrintOperator("Hello from testFunc4!")
+        );
+    myClass->add(methodWithBody, Unit::PUBLIC);
     return myClass->compile();
 }
 

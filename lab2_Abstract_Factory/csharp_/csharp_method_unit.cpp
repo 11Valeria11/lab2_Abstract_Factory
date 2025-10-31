@@ -1,4 +1,4 @@
-#include "csharp_method_unit.h"
+#include "csharp\csharp_method_unit.h"
 
 CSharpMethodUnit::CSharpMethodUnit(const std::string& name, const std::string& returnType, Flags flags)
     : m_name(name), m_returnType(returnType), m_flags(flags) {}
@@ -6,7 +6,8 @@ CSharpMethodUnit::CSharpMethodUnit(const std::string& name, const std::string& r
 void CSharpMethodUnit::add(const std::shared_ptr<Unit>& unit, Flags) { m_body.push_back(unit); }
 
 std::string CSharpMethodUnit::compile(unsigned int level) const {
-    std::string result = generateShift(level) + "public ";
+//    std::string result = generateShift(level);
+    std::string result;
     if (m_flags & STATIC) {
         result += "static ";}
     else if (m_flags & VIRTUAL) {

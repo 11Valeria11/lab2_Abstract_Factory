@@ -1,7 +1,8 @@
-#include "cpp_class_unit.h"
+#include "cpp/cpp_class_unit.h"
 #include <map>
 
-CppClassUnit::CppClassUnit(const std::string& name) : m_name(name) {}
+CppClassUnit::CppClassUnit(const std::string& name, Flags flags, Flags /*accessModifier*/)
+    : m_name(name), m_flags(flags) {}
 
 void CppClassUnit::add(const std::shared_ptr<Unit>& unit, Flags flags) {
     m_fields.push_back({unit, flags});

@@ -9,6 +9,16 @@
 
 class Unit {
 public:
+    enum AccessModifier {
+        PUBLIC,
+        PROTECTED,
+        PRIVATE,
+        PRIVATEPROTECTED,
+        FILE,
+        INTERNAL,
+        PROTECTEDINTERNAL
+    };
+
     using Flags = unsigned int;
 
     enum Modifier {

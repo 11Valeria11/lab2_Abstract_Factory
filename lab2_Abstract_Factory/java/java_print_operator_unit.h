@@ -6,7 +6,7 @@
 class JavaPrintOperatorUnit : public Unit {
 
 public:
-    explicit JavaPrintOperatorUnit(const std::string& text);
+    JavaPrintOperatorUnit(const std::string& text);
     std::string compile(unsigned int level = 0) const override;
 
 private:
